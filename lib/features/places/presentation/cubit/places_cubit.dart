@@ -16,11 +16,11 @@ class PlacesCubit extends Cubit<PlacesState> {
   final GetStatesOfSouthIndiaUseCase getStatesOfSouthIndiaUseCase;
   final GetPlacesUseCase getPlacesUseCase;
 
-  PlacesCubit(
-    this.getPlaceDescriptionuseCase,
-    this.getStatesOfSouthIndiaUseCase,
-    this.getPlacesUseCase,
-  ) : super(PlacesState.initial());
+  PlacesCubit({
+    required this.getPlaceDescriptionuseCase,
+    required this.getStatesOfSouthIndiaUseCase,
+    required this.getPlacesUseCase,
+  }) : super(PlacesState.initial());
 
   void getStatesOfSouthIndia() async {
     emit(state.copyWith(status: PlacesStatus.loading));
