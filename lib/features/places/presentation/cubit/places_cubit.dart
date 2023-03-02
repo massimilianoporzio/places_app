@@ -1,12 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:places_app/core/usecases/base_usecase.dart';
+import '../../../../core/usecases/base_usecase.dart';
 
-import 'package:places_app/features/places/domain/usecases/get_place_description.dart';
-import 'package:places_app/features/places/domain/usecases/get_places.dart';
-import 'package:places_app/features/places/domain/usecases/get_states_south_india.dart';
+import '../../domain/usecases/get_place_description.dart';
+import '../../domain/usecases/get_places.dart';
+import '../../domain/usecases/get_states_south_india.dart';
 
-import '../../../../core/errors/failures.dart';
 import '../../domain/entities/place_entity.dart';
 
 part 'places_state.dart';

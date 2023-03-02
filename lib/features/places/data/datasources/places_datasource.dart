@@ -1,3 +1,5 @@
+import 'package:places_app/core/errors/exceptions.dart';
+
 import '../../domain/entities/place_entity.dart';
 
 abstract class PlacesDatasource {
@@ -21,6 +23,7 @@ class PlacesDataSourceImpl implements PlacesDatasource {
 
   @override
   Future<List<Place>> getPlaces() async {
+    // throw LocalDataSourceException(); //per debug
     await Future.delayed(const Duration(seconds: 1));
     return Future.value([
       const Place(
