@@ -6,7 +6,7 @@ import 'package:places_app/features/places/domain/usecases/get_places.dart';
 import 'package:places_app/features/places/domain/usecases/get_states_south_india.dart';
 import 'package:places_app/features/places/presentation/cubit/places_cubit.dart';
 
-import '../../features/places/data/datasources/places_datasource.dart';
+import '../../features/places/data/datasources/places_remote_datasource.dart';
 
 final sl = GetIt.asNewInstance();
 
@@ -33,7 +33,8 @@ Future<void> init() async {
       () => PlacesRepositoryImpl(localDatasource: sl()));
 
   //DATASOURCES
-  sl.registerLazySingleton<PlacesDatasource>(() => PlacesDataSourceImpl());
+  sl.registerLazySingleton<PlacesRemoteDatasource>(
+      () => PlacesDataSourceImpl());
 
   //EXTERNALS
 }

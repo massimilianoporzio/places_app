@@ -5,10 +5,10 @@ import 'package:places_app/core/errors/failures.dart';
 import 'package:places_app/features/places/domain/entities/place_entity.dart';
 import 'package:places_app/features/places/domain/repositories/places_repository.dart';
 
-import '../datasources/places_datasource.dart';
+import '../datasources/places_remote_datasource.dart';
 
 class PlacesRepositoryImpl implements PlacesRepository {
-  final PlacesDatasource localDatasource;
+  final PlacesRemoteDatasource localDatasource;
   PlacesRepositoryImpl({
     required this.localDatasource,
   });
@@ -27,7 +27,12 @@ class PlacesRepositoryImpl implements PlacesRepository {
   @override
   Future<Either<Failure, List<Place>>> getPlaces() async {
     try {
+      //GUARDO IN CACHE
+
       final result = await localDatasource.getPlaces();
+      if (result.isNotEmpty) {
+        //METTO IN CACHE
+      }
       return Right(result);
     } on LocalDataSourceException {
       return Left(
