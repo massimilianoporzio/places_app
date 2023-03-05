@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:places_app/core/utils/screen_sizes.dart';
-import 'package:places_app/features/places/presentation/widgets/home_page_large.dart';
-import 'package:places_app/features/places/presentation/widgets/home_page_medium.dart';
-import 'package:places_app/features/places/presentation/widgets/home_page_small.dart';
+import 'package:places_app/features/places/presentation/widgets/large/home_page_large.dart';
+import 'package:places_app/features/places/presentation/widgets/medium/home_page_medium.dart';
+import 'package:places_app/features/places/presentation/widgets/small/home_page_small.dart';
 
 class PlacesResponsivePage extends StatelessWidget {
   const PlacesResponsivePage({super.key});

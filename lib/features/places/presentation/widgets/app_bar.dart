@@ -6,7 +6,7 @@ class PlacesAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Places App'),
+      title: const Text('Places App - Responsive'),
       centerTitle: true,
     );
   }

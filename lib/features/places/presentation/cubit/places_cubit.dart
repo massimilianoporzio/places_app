@@ -32,7 +32,9 @@ class PlacesCubit extends Cubit<PlacesState> {
         ),
       ),
       (statesOfSouthIndia) => emit(state.copyWith(
-          status: PlacesStatus.loaded, statesOfSouthIndia: statesOfSouthIndia)),
+        status: PlacesStatus.loaded,
+        statesOfSouthIndia: statesOfSouthIndia,
+      )),
     );
   }
 
@@ -64,5 +66,9 @@ class PlacesCubit extends Cubit<PlacesState> {
       (places) =>
           emit(state.copyWith(status: PlacesStatus.loaded, places: places)),
     );
+  }
+
+  void setSelectedPlace(Place place) async {
+    emit(state.copyWith(selectedPlace: place));
   }
 }

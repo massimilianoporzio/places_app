@@ -9,6 +9,7 @@ enum PlacesStatus {
 
 class PlacesState extends Equatable {
   final List<Place>? places;
+  final Place? selectedPlace;
   final String? placeDescription;
   final List<String>? statesOfSouthIndia;
   final PlacesStatus status;
@@ -16,6 +17,7 @@ class PlacesState extends Equatable {
 
   const PlacesState({
     this.places,
+    this.selectedPlace,
     this.placeDescription,
     this.statesOfSouthIndia,
     required this.status,
@@ -30,13 +32,14 @@ class PlacesState extends Equatable {
 
   @override
   String toString() {
-    return 'PlacesState(places: $places, placeDescription: $placeDescription, statesOfSouthIndia: $statesOfSouthIndia, status: $status, message: $errorMsg)';
+    return 'PlacesState(places: $places, selectedPlace: $selectedPlace, placeDescription: $placeDescription, statesOfSouthIndia: $statesOfSouthIndia, status: $status, errorMsg: $errorMsg)';
   }
 
   @override
   List<Object?> get props {
     return [
       places,
+      selectedPlace,
       placeDescription,
       statesOfSouthIndia,
       status,
@@ -46,6 +49,7 @@ class PlacesState extends Equatable {
 
   PlacesState copyWith({
     List<Place>? places,
+    Place? selectedPlace,
     String? placeDescription,
     List<String>? statesOfSouthIndia,
     PlacesStatus? status,
@@ -53,6 +57,7 @@ class PlacesState extends Equatable {
   }) {
     return PlacesState(
       places: places ?? this.places,
+      selectedPlace: selectedPlace ?? this.selectedPlace,
       placeDescription: placeDescription ?? this.placeDescription,
       statesOfSouthIndia: statesOfSouthIndia ?? this.statesOfSouthIndia,
       status: status ?? this.status,
