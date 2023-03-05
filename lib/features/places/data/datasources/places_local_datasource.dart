@@ -5,7 +5,6 @@ import '../../domain/entities/place_entity.dart';
 class LocalPlacesDataSource implements PlacesDatasource {
   @override
   Future<List<String>> getStatesOfSouthIndia() async {
-    await Future.delayed(const Duration(seconds: 1));
     return Future.value([
       'Andhra Pradesh',
       'Karnataka',
@@ -18,7 +17,7 @@ class LocalPlacesDataSource implements PlacesDatasource {
   @override
   Future<List<Place>> getPlaces() async {
     // throw LocalDataSourceException(); //per debug
-    await Future.delayed(const Duration(seconds: 1));
+
     List<Place> places = [
       const Place(
         image: 'assets/images/india_chennai_flower_market.png',
@@ -86,8 +85,6 @@ class LocalPlacesDataSource implements PlacesDatasource {
 
   @override
   Future<String> getPlaceDescription() async {
-    await Future.delayed(const Duration(seconds: 1));
-
     return Future.value(
         'Tamil Nadu is a state in the south-eastern part of the Indian Peninsula. '
         'Tamil Nadu is previously a part of the United Madras Province, '

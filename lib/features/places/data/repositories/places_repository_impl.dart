@@ -5,10 +5,10 @@ import 'package:places_app/core/errors/failures.dart';
 import 'package:places_app/features/places/domain/entities/place_entity.dart';
 import 'package:places_app/features/places/domain/repositories/places_repository.dart';
 
-import '../datasources/places_remote_datasource.dart';
+import '../datasources/places_datasource.dart';
 
 class PlacesRepositoryImpl implements PlacesRepository {
-  final PlacesRemoteDatasource localDatasource;
+  final PlacesDatasource localDatasource;
   PlacesRepositoryImpl({
     required this.localDatasource,
   });
