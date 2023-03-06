@@ -45,7 +45,7 @@ class PlacesGallery extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else {
-          if (state.selectedPlace == null) {
+          if (state.selectedPlace == null && state.places!.isNotEmpty) {
             //selez il primo se non ho ancora selez nulla
             context.read<PlacesCubit>().setSelectedPlace(state.places![0]);
           }

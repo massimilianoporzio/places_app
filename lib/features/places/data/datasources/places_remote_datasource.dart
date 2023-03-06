@@ -1,12 +1,8 @@
+import 'package:places_app/features/places/data/datasources/places_datasource.dart';
+
 import '../../domain/entities/place_entity.dart';
 
-abstract class PlacesRemoteDatasource {
-  Future<List<String>> getStatesOfSouthIndia();
-  Future<List<Place>> getPlaces();
-  Future<String> getPlaceDescription();
-}
-
-class PlacesDataSourceImpl implements PlacesRemoteDatasource {
+class PlacesRemoteDataSource implements PlacesDatasource {
   @override
   Future<List<String>> getStatesOfSouthIndia() async {
     await Future.delayed(const Duration(seconds: 1));

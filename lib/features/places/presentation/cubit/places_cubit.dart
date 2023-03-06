@@ -54,18 +54,22 @@ class PlacesCubit extends Cubit<PlacesState> {
   }
 
   void getPlaces() async {
-    emit(state.copyWith(status: PlacesStatus.loading));
-    final response = await getPlacesUseCase(NoParams());
-    response.fold(
-      (failure) => emit(
-        state.copyWith(
-          errorMsg: failure.message,
-          status: PlacesStatus.error,
+    if (state.places!.isNotEmpty) {
+      emit(state.copyWith(status: PlacesStatus.loaded));
+    } else {
+      emit(state.copyWith(status: PlacesStatus.loading));
+      final response = await getPlacesUseCase(NoParams());
+      response.fold(
+        (failure) => emit(
+          state.copyWith(
+            errorMsg: failure.message,
+            status: PlacesStatus.error,
+          ),
         ),
-      ),
-      (places) =>
-          emit(state.copyWith(status: PlacesStatus.loaded, places: places)),
-    );
+        (places) =>
+            emit(state.copyWith(status: PlacesStatus.loaded, places: places)),
+      );
+    }
   }
 
   void setSelectedPlace(Place place) async {
