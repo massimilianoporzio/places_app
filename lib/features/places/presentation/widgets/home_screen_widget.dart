@@ -64,30 +64,34 @@ class _GridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DetailPage(place: place),
-          ));
-        },
-        child: GridTile(
-          footer: GridTileBar(
-            backgroundColor: Colors.black45,
-            title: Text(place.title),
-            subtitle: Text(place.subtitle),
+    return BlocBuilder<PlacesCubit, PlacesState>(
+      builder: (context, state) {
+        return Card(
+          elevation: 10,
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
           ),
-          child: Ink.image(
-            image: AssetImage(place.image),
-            fit: BoxFit.cover,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => DetailPage(place: place),
+              ));
+            },
+            child: GridTile(
+              footer: GridTileBar(
+                backgroundColor: Colors.black45,
+                title: Text(place.title),
+                subtitle: Text(place.subtitle),
+              ),
+              child: Ink.image(
+                image: AssetImage(place.image),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

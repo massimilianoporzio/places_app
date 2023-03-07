@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:places_app/features/places/presentation/widgets/drawer_body.dart';
 import 'package:places_app/features/places/presentation/widgets/places_gallery.dart';
-import 'package:places_app/features/places/presentation/widgets/plaec_details.dart';
 
 import '../../cubit/places_cubit.dart';
 import '../app_bar.dart';
+import '../place_details_responsive.dart';
 
 class HomePageLarge extends StatelessWidget {
   const HomePageLarge({super.key});
@@ -38,7 +38,9 @@ class HomePageLarge extends StatelessWidget {
                     ),
                     BlocBuilder<PlacesCubit, PlacesState>(
                       builder: (context, state) {
-                        if (state.status == PlacesStatus.loaded) {
+                        if (state.status == PlacesStatus.loaded &&
+                            state.selectedPlace == null &&
+                            state.places!.isNotEmpty) {
                           context
                               .read<PlacesCubit>()
                               .setSelectedPlace(state.places![0]);
@@ -46,7 +48,9 @@ class HomePageLarge extends StatelessWidget {
 
                         return Expanded(
                           flex: 2,
-                          child: PlaceDetails(place: state.selectedPlace),
+                          child: PlaceDetails(
+                            place: state.selectedPlace!,
+                          ),
                         );
                       },
                     )

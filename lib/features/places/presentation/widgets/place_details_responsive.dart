@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:places_app/core/presentation/widgets/error_dialog.dart';
 import 'package:places_app/features/places/presentation/widgets/button_section.dart';
 import 'package:places_app/features/places/presentation/widgets/text_section.dart';
 import 'package:places_app/features/places/presentation/widgets/title_section.dart';
 
 import '../../domain/entities/place_entity.dart';
+import '../cubit/places_cubit.dart';
 
-class PlaceDetailsResponsive extends StatelessWidget {
+class PlaceDetails extends StatelessWidget {
   final Place place;
-  const PlaceDetailsResponsive({
+
+  const PlaceDetails({
     Key? key,
     required this.place,
   }) : super(key: key);
@@ -17,7 +21,7 @@ class PlaceDetailsResponsive extends StatelessWidget {
     Color color = Theme.of(context).primaryColor;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 600) {
+        if (constraints.maxWidth >= 600.00) {
           return _largeWidget(color);
         } else {
           return _smallWidget(color);
@@ -27,29 +31,73 @@ class PlaceDetailsResponsive extends StatelessWidget {
   }
 
   Widget _largeWidget(Color color) {
-    return SingleChildScrollView(
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        elevation: 6,
-        margin: const EdgeInsets.all(10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-        ),
-      ),
+    return BlocConsumer<PlacesCubit, PlacesState>(
+      listener: (context, state) {
+        if (state.status == PlacesStatus.error) {
+          errorDialog(context, errorMsg: state.errorMsg!);
+        }
+      },
+      builder: (context, state) {
+        if (state.status == PlacesStatus.loading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          if (state.status == PlacesStatus.loaded) {
+            return SingleChildScrollView(
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                elevation: 6,
+                margin: const EdgeInsets.all(10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Image.asset(place!.image),
+                          TitleSection(place: place!)
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 24.0),
+                            child: ButtonSection(),
+                          ),
+                          TextSection(
+                            placeDescription: place!.description,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return const SizedBox();
+          }
+        }
+      },
     );
   }
 
-  Widget _smallWidget(Color color) {
+  Widget _smallWidget(
+    Color color,
+  ) {
     return ListView(
       children: [
         Image.asset(
-          place.image,
+          place!.image,
           height: 320,
           fit: BoxFit.cover,
         ),
-        TitleSection(place: place),
+        TitleSection(place: place!),
         const ButtonSection(),
-        const TextSection()
+        TextSection(placeDescription: place!.description),
       ],
     );
   }

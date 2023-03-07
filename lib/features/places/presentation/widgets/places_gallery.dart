@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:places_app/core/presentation/widgets/error_dialog.dart';
 import 'package:places_app/core/utils/screen_sizes.dart';
 import 'package:places_app/features/places/presentation/cubit/places_cubit.dart';
-import 'package:places_app/features/places/presentation/widgets/plaec_details.dart';
 
 import '../../domain/entities/place_entity.dart';
+import '../pages/detail_page.dart';
 
 class PlacesGallery extends StatelessWidget {
   final bool showHorizontalGridView;
@@ -100,7 +100,7 @@ class _GridItem extends StatelessWidget {
             case ScreenSize.small:
             case ScreenSize.medium:
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => PlaceDetails(place: place),
+                builder: (context) => PlaceDetailsPage(place),
               ));
               break;
             case ScreenSize.large:
